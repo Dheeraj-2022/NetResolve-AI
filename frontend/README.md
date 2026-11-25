@@ -23,10 +23,11 @@ npm run dev      # http://localhost:5173
 
 ## Configuration
 
-`.env` sets the backend URL (defaults to `http://127.0.0.1:8000` if unset):
+`.env` can set a separate backend URL for local development. When unset, the
+frontend calls the API on the same origin (the Cloud Run deployment default):
 
 ```
-VITE_API_BASE_URL=http://127.0.0.1:8000
+# VITE_API_BASE_URL=http://127.0.0.1:8000
 ```
 
 The backend allows CORS from `localhost`/`127.0.0.1` on ports 3000, 5000, 5173 and 8000;

@@ -1,54 +1,61 @@
 /* ==========================================================================
-   NetResolve AI — Warm Swiss Industrial Design System
-   Light alabaster paper & ink surfaces; color is reserved for operational state.
+   NetResolve AI — Brand Design System
+   Navy-and-teal brand palette with clean operational state colours.
+   Brand: #1a2744 (Navy) · #2ea8c5 (Teal AI) · #ffffff (Surface)
    ========================================================================== */
 
 :root {
-  /* Surfaces — Warm Swiss Industrial Paper & Ink */
-  --bg: #f6f5f1;
+  /* Surfaces */
+  --bg: #f4f6f9;
   --surface: #ffffff;
-  --surface-2: #f8f7f3;
-  --surface-sunken: #efeeea;
-  --border: #e2dfd7;
-  --border-strong: #cbc6bd;
+  --surface-2: #f7f9fc;
+  --surface-sunken: #edf0f5;
+  --border: #dde2ec;
+  --border-strong: #c4ccd9;
 
-  /* Text — refined contrast while preserving warm stone hierarchy */
-  --text: #171614;
-  --text-2: #524f49;
-  --text-3: #6c6961;
-  --text-4: #848178;
+  /* Text */
+  --text: #0f1a2e;
+  --text-2: #3a4a62;
+  --text-3: #5e6e88;
+  --text-4: #8898b0;
 
-  /* Primary Ink Accent (restrained, high-contrast) */
-  --accent: #171614;
-  --accent-hover: #33312d;
-  --accent-subtle: #efeeea;
-  --accent-border: #cbc6bd;
-  --focus-ring: 0 0 0 2px var(--surface), 0 0 0 4px rgba(23, 22, 20, 0.24);
+  /* Primary Brand Accent — NetResolve Navy */
+  --accent: #1a2744;
+  --accent-hover: #243459;
+  --accent-subtle: #edf1f8;
+  --accent-border: #c4ccd9;
+  --focus-ring: 0 0 0 2px var(--surface), 0 0 0 4px rgba(26, 39, 68, 0.28);
+
+  /* Brand Teal (AI / secondary actions) */
+  --brand-teal: #2ea8c5;
+  --brand-teal-hover: #239db9;
+  --brand-teal-bg: #eaf7fa;
+  --brand-teal-border: #b0dfe9;
 
   /* Semantic Status Pigments */
-  --crit: #b83b2a;
-  --crit-hover: #9d3021;
-  --crit-bg: #fbece9;
-  --crit-border: #f0c6be;
-  --warn: #9a5b13;
-  --warn-bg: #fbf3e4;
-  --warn-border: #e8cfa9;
-  --ok: #2f6b48;
-  --ok-bg: #eaf3ed;
-  --ok-border: #b8dac4;
-  --info: #171614;
-  --info-bg: #f4f3ee;
-  --info-border: #dedbd2;
-  --neutral-bg: #f4f3ee;
-  --neutral-border: #dedbd2;
+  --crit: #c0392b;
+  --crit-hover: #a93226;
+  --crit-bg: #fdf0ee;
+  --crit-border: #f1c4be;
+  --warn: #a0620e;
+  --warn-bg: #fdf5e6;
+  --warn-border: #ecd3a0;
+  --ok: #1e7e4a;
+  --ok-bg: #e8f5ed;
+  --ok-border: #9fd3b4;
+  --info: #1a2744;
+  --info-bg: #edf1f8;
+  --info-border: #c4ccd9;
+  --neutral-bg: #f4f6f9;
+  --neutral-border: #dde2ec;
 
-  /* Shell — Light Alabaster Industrial Sidebar */
-  --nav-bg: #f6f5f1;
-  --nav-bg-hover: #eceae3;
-  --nav-bg-active: #ffffff;
-  --nav-text: #524f49;
-  --nav-text-muted: #76736b;
-  --nav-border: #e2dfd7;
+  /* Shell — Navy Sidebar */
+  --nav-bg: #1a2744;
+  --nav-bg-hover: #223259;
+  --nav-bg-active: #2d4070;
+  --nav-text: #c8d4e8;
+  --nav-text-muted: #8898b0;
+  --nav-border: #263454;
 
   /* Typography */
   --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -70,23 +77,23 @@
   --sp-6: 24px;
   --sp-7: 32px;
 
-  /* Subtle Architectural Radii & Warm Elevation */
+  /* Radii & Elevation */
   --radius-sm: 3px;
   --radius: 5px;
   --radius-lg: 7px;
 
-  --shadow-xs: 0 1px 2px rgba(23, 22, 20, 0.04);
-  --shadow-sm: 0 1px 3px rgba(23, 22, 20, 0.05), 0 1px 2px rgba(23, 22, 20, 0.03);
-  --shadow-md: 0 4px 12px rgba(23, 22, 20, 0.07), 0 1px 3px rgba(23, 22, 20, 0.04);
-  --shadow-pop: 0 10px 28px rgba(23, 22, 20, 0.12), 0 2px 6px rgba(23, 22, 20, 0.06);
+  --shadow-xs: 0 1px 2px rgba(15, 26, 46, 0.06);
+  --shadow-sm: 0 1px 3px rgba(15, 26, 46, 0.07), 0 1px 2px rgba(15, 26, 46, 0.04);
+  --shadow-md: 0 4px 12px rgba(15, 26, 46, 0.09), 0 1px 3px rgba(15, 26, 46, 0.05);
+  --shadow-pop: 0 10px 28px rgba(15, 26, 46, 0.14), 0 2px 6px rgba(15, 26, 46, 0.07);
 
   /* Motion */
   --ease: cubic-bezier(0.2, 0, 0, 1);
   --dur-fast: 140ms;
   --dur-med: 200ms;
 
-  --sidebar-w: 236px;
-  --topbar-h: 54px;
+  --sidebar-w: 240px;
+  --topbar-h: 56px;
 }
 
 * {
@@ -202,10 +209,16 @@ a:hover {
   width: var(--sidebar-w);
   flex-shrink: 0;
   background: var(--nav-bg);
-  color: var(--text);
+  color: var(--nav-text);
   display: flex;
   flex-direction: column;
   border-right: 1px solid var(--nav-border);
+  transition: width var(--dur-med) var(--ease);
+  overflow: hidden;
+}
+
+.sidebar-collapsed {
+  width: 64px;
 }
 
 .sidebar-brand {
@@ -213,18 +226,75 @@ a:hover {
   display: flex;
   align-items: center;
   gap: 9px;
-  padding: 0 var(--sp-4);
+  padding: 0 10px;
   border-bottom: 1px solid var(--nav-border);
-  background: var(--surface);
+  background: #ffffff;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+/* Logo icon — small square showing just the diamond icon */
+.brand-logo-icon {
+  width: 34px;
+  height: 34px;
+  object-fit: cover;
+  object-position: center top;
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+}
+
+/* Brand name text — hidden when collapsed */
+.brand-name {
+  flex: 1;
+  min-width: 0;
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.brand-name strong {
+  color: var(--brand-teal);
+  font-weight: 700;
+}
+
+/* Collapse / expand toggle button */
+.sidebar-toggle {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-2);
+  color: var(--text-3);
+  cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease);
+}
+
+.sidebar-toggle:hover {
+  background: var(--accent-subtle);
+  border-color: var(--accent-border);
+  color: var(--accent);
+}
+
+.sidebar-collapsed .sidebar-brand {
+  justify-content: center;
+  padding: 0 10px;
+  gap: 0;
 }
 
 .brand-mark {
   width: 24px;
   height: 24px;
   border-radius: var(--radius-sm);
-  background: var(--accent);
-  color: #f6f5f1;
+  background: var(--brand-teal);
+  color: #ffffff;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -233,11 +303,19 @@ a:hover {
 }
 
 .brand-name {
-  font-weight: 700;
-  font-size: 13px;
-  letter-spacing: 0.03em;
+  font-weight: 600;
+  font-size: 13.5px;
+  letter-spacing: 0.01em;
   color: var(--text);
-  text-transform: uppercase;
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.brand-name strong {
+  color: var(--brand-teal);
+  font-weight: 700;
 }
 
 .brand-ver {
@@ -246,16 +324,54 @@ a:hover {
   font-weight: 600;
   padding: 1px 6px;
   border-radius: var(--radius-sm);
-  background: var(--bg);
-  border: 1px solid var(--border);
-  color: var(--text-2);
-  margin-left: auto;
+  background: var(--accent-subtle);
+  border: 1px solid var(--accent-border);
+  color: var(--text-3);
+  flex-shrink: 0;
 }
 
 .brand-sub {
   font-size: var(--fs-xs);
   color: var(--nav-text-muted);
 }
+
+/* ---- Collapsed sidebar icon-only mode ---- */
+.sidebar-collapsed .nav-item {
+  justify-content: center;
+  padding: 0;
+  position: relative;
+}
+
+.sidebar-collapsed .nav-item[aria-current='page']::before {
+  left: 0;
+  top: 50%;
+  bottom: auto;
+  transform: translateY(-50%);
+  height: 20px;
+  width: 3px;
+}
+
+/* Dot badge for collapsed nav items with counts */
+.nav-count-dot {
+  position: absolute;
+  top: 5px;
+  right: 6px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--text-3);
+  border: 1.5px solid var(--nav-bg);
+  pointer-events: none;
+}
+
+.nav-count-dot.attention {
+  background: var(--warn);
+}
+
+.sidebar-collapsed .nav-group + .nav-group {
+  margin-top: var(--sp-2);
+}
+/* ----------------------------------------- */
 
 .sidebar-nav {
   flex: 1;
@@ -299,14 +415,14 @@ a:hover {
 
 .nav-item:hover {
   background: var(--nav-bg-hover);
-  color: var(--text);
+  color: #ffffff;
 }
 
 .nav-item[aria-current='page'] {
   background: var(--nav-bg-active);
-  color: var(--text);
+  color: #ffffff;
   font-weight: 600;
-  border-color: var(--border);
+  border-color: rgba(255,255,255,0.08);
   box-shadow: var(--shadow-xs);
 }
 
@@ -318,7 +434,7 @@ a:hover {
   bottom: 6px;
   width: 3px;
   border-radius: 0 2px 2px 0;
-  background: var(--accent);
+  background: var(--brand-teal);
 }
 
 .nav-item svg {
@@ -329,7 +445,7 @@ a:hover {
 
 .nav-item:hover svg,
 .nav-item[aria-current='page'] svg {
-  color: var(--text);
+  color: #ffffff;
 }
 
 .nav-label {
@@ -345,9 +461,9 @@ a:hover {
   font-size: 10px;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
-  background: var(--surface-sunken);
-  color: var(--text-2);
-  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.08);
+  color: var(--nav-text);
+  border: 1px solid rgba(255,255,255,0.1);
   border-radius: var(--radius-sm);
   padding: 1px 6px;
   min-width: 20px;
@@ -356,7 +472,7 @@ a:hover {
 }
 
 .nav-item[aria-current='page'] .nav-count:not(.attention) {
-  background: var(--bg);
+  background: rgba(255,255,255,0.1);
 }
 
 .nav-count.attention {
@@ -367,11 +483,11 @@ a:hover {
 
 .sidebar-footer {
   border-top: 1px solid var(--nav-border);
-  background: var(--surface-2);
+  background: #131e38;
   padding: 10px var(--sp-4);
   font-family: var(--font-mono);
   font-size: 10px;
-  color: var(--text-3);
+  color: var(--nav-text-muted);
   display: grid;
   gap: 5px;
 }
@@ -384,7 +500,7 @@ a:hover {
 }
 
 .sidebar-footer .val {
-  color: var(--text);
+  color: var(--nav-text);
   font-weight: 600;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -407,7 +523,7 @@ a:hover {
   align-items: center;
   gap: 10px;
   padding: 0 var(--sp-5);
-  box-shadow: 0 1px 0 rgba(23, 22, 20, 0.02);
+  box-shadow: 0 1px 0 rgba(15, 26, 46, 0.04);
   z-index: 20;
 }
 
@@ -793,13 +909,13 @@ button.stat:hover {
 }
 
 .btn-primary {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #f6f5f1;
+  background: var(--brand-teal);
+  border-color: var(--brand-teal);
+  color: #ffffff;
 }
 .btn-primary:hover:not(:disabled) {
-  background: var(--accent-hover);
-  border-color: var(--accent-hover);
+  background: var(--brand-teal-hover);
+  border-color: var(--brand-teal-hover);
   color: #ffffff;
 }
 
@@ -1019,7 +1135,7 @@ button.stat:hover {
   background: var(--surface);
   color: var(--text);
   font-weight: 600;
-  box-shadow: inset 0 -2px 0 var(--accent);
+  box-shadow: inset 0 -2px 0 var(--brand-teal);
 }
 .segmented .seg-count {
   font-family: var(--font-mono);
@@ -1068,7 +1184,7 @@ button.stat:hover {
 .tab[aria-selected='true'] {
   color: var(--text);
   font-weight: 600;
-  border-bottom-color: var(--accent);
+  border-bottom-color: var(--brand-teal);
 }
 
 /* ==========================================================================
@@ -1763,7 +1879,7 @@ button.stat:hover {
 .nr-kpi-card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-left: 3px solid var(--accent);
+  border-left: 3px solid var(--brand-teal);
   border-radius: var(--radius-lg);
   padding: 15px 17px;
   text-align: left;
@@ -1868,8 +1984,8 @@ button.stat:hover {
 
 .nr-confirm-card {
   background: var(--surface);
-  border: 1px solid var(--accent);
-  border-left: 4px solid var(--accent);
+  border: 1px solid var(--brand-teal-border);
+  border-left: 4px solid var(--brand-teal);
   border-radius: var(--radius-lg);
   padding: 16px 18px;
   box-shadow: var(--shadow-md);
@@ -1895,7 +2011,7 @@ button.stat:hover {
 
 .nr-chat-msg.user {
   background: var(--surface-2);
-  border-left: 3px solid var(--accent);
+  border-left: 3px solid var(--brand-teal);
 }
 
 .nr-chat-msg.assistant {
@@ -2275,9 +2391,9 @@ button.stat:hover {
   height: 40px;
   padding: 0 16px;
   border-radius: var(--radius-lg);
-  background: var(--accent);
-  color: #f6f5f1;
-  border: 1px solid var(--accent);
+  background: var(--brand-teal);
+  color: #ffffff;
+  border: 1px solid var(--brand-teal);
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 700;
@@ -2288,7 +2404,7 @@ button.stat:hover {
     box-shadow var(--dur-fast) var(--ease);
 }
 .nr-floating-trigger:hover {
-  background: var(--accent-hover);
+  background: var(--brand-teal-hover);
   transform: translateY(-1px);
   box-shadow: var(--shadow-pop);
 }

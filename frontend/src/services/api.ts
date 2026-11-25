@@ -1,6 +1,6 @@
 /**
  * Centralized API client for Network Triage FastAPI backend.
- * Uses VITE_API_BASE_URL (defaults to http://127.0.0.1:8000).
+ * Uses VITE_API_BASE_URL when set; otherwise calls the API on this page's origin.
  *
  * Never put secrets in VITE_* variables: they are compiled into the public bundle.
  * If the backend sets NBT_API_KEY, the operator types the key at runtime; it is kept
@@ -28,7 +28,7 @@ import {
   VoiceWalkthroughResponse,
 } from '../types';
 
-const BASE_URL = (import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000').replace(/\/$/, '');
+const BASE_URL = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/$/, '');
 export const API_BASE_URL = BASE_URL;
 
 const KEY_STORAGE = 'nbt_api_key';

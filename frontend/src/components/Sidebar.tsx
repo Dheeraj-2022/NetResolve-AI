@@ -2,6 +2,8 @@ import React from 'react';
 import {
   Activity,
   AlertTriangle,
+  ChevronLeft,
+  ChevronRight,
   Cpu,
   GitBranch,
   LayoutGrid,
@@ -28,6 +30,8 @@ interface SidebarProps {
   connection: 'connecting' | 'online' | 'offline';
   modelTrained?: boolean;
   aiBackend?: string | null;
+  collapsed: boolean;
+  onToggleCollapse: () => void;
 }
 
 type Item = { id: PageId; label: string; icon: React.ReactNode; count?: number; attention?: boolean };
@@ -39,6 +43,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
   connection,
   modelTrained,
   aiBackend,
+  collapsed,
+  onToggleCollapse,
 }) => {
   const groups: { label: string; items: Item[] }[] = [
     {
@@ -74,19 +80,27 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const active = currentPage === 'incident-detail' ? 'incidents' : currentPage;
 
   return (
-    <aside className="sidebar" aria-label="Primary">
+    <aside className={`sidebar${collapsed ? ' sidebar-collapsed' : ''}`} aria-label="Primary">
+      {/* Brand bar: logo icon + name + collapse toggle */}
       <div className="sidebar-brand">
-        <span className="brand-mark" aria-hidden>
-          <LayoutGrid size={13} />
-        </span>
-        <span className="brand-name">NetResolve AI</span>
-        <span className="brand-ver">V2.4</span>
+        <img src="/logo.png" alt="" className="brand-logo-icon" aria-hidden />
+        {!collapsed && (
+          <span className="brand-name">NetResolve <strong>AI</strong></span>
+        )}
+        <button
+          className="sidebar-toggle"
+          onClick={onToggleCollapse}
+          aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+          title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+        >
+          {collapsed ? <ChevronRight size={15} /> : <ChevronLeft size={15} />}
+        </button>
       </div>
 
       <nav className="sidebar-nav">
         {groups.map((g) => (
           <div className="nav-group" key={g.label}>
-            <div className="nav-group-label">{g.label}</div>
+            {!collapsed && <div className="nav-group-label">{g.label}</div>}
             {g.items.map((item) => (
               <button
                 key={item.id}
@@ -96,9 +110,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 title={item.label}
               >
                 {item.icon}
-                <span className="nav-label">{item.label}</span>
-                {item.count !== undefined && item.count > 0 && (
+                {!collapsed && <span className="nav-label">{item.label}</span>}
+                {!collapsed && item.count !== undefined && item.count > 0 && (
                   <span className={`nav-count${item.attention ? ' attention' : ''}`}>{item.count}</span>
+                )}
+                {collapsed && item.count !== undefined && item.count > 0 && (
+                  <span className={`nav-count-dot${item.attention ? ' attention' : ''}`} aria-label={`${item.count} items`} />
                 )}
               </button>
             ))}
@@ -106,32 +123,34 @@ export const Sidebar: React.FC<SidebarProps> = ({
         ))}
       </nav>
 
-      <div className="sidebar-footer">
-        <div className="row">
-          <span>CTR:</span>
-          <span className="val" style={{ color: connection === 'online' ? 'var(--ok)' : connection === 'offline' ? 'var(--crit)' : 'var(--text-2)' }}>
-            {connection === 'online' ? 'ACTIVE' : connection === 'offline' ? 'OFFLINE' : 'SYNCING'}
-          </span>
+      {!collapsed && (
+        <div className="sidebar-footer">
+          <div className="row">
+            <span>CTR:</span>
+            <span className="val" style={{ color: connection === 'online' ? 'var(--ok)' : connection === 'offline' ? 'var(--crit)' : 'var(--text-2)' }}>
+              {connection === 'online' ? 'ACTIVE' : connection === 'offline' ? 'OFFLINE' : 'SYNCING'}
+            </span>
+          </div>
+          <div className="row">
+            <span>API:</span>
+            <span className="val truncate" title={API_BASE_URL} style={{ maxWidth: 132 }}>
+              {API_BASE_URL.replace(/^https?:\/\//, '')}
+            </span>
+          </div>
+          <div className="row">
+            <span>XGB:</span>
+            <span className="val" style={{ color: modelTrained ? 'var(--ok)' : 'var(--warn)' }}>
+              {modelTrained === undefined ? '—' : modelTrained ? 'TRAINED' : 'FALLBACK'}
+            </span>
+          </div>
+          <div className="row">
+            <span>AI:</span>
+            <span className="val truncate" style={{ maxWidth: 132 }}>
+              {(aiBackend || 'DISABLED').toUpperCase()}
+            </span>
+          </div>
         </div>
-        <div className="row">
-          <span>API:</span>
-          <span className="val truncate" title={API_BASE_URL} style={{ maxWidth: 132 }}>
-            {API_BASE_URL.replace(/^https?:\/\//, '')}
-          </span>
-        </div>
-        <div className="row">
-          <span>XGB:</span>
-          <span className="val" style={{ color: modelTrained ? 'var(--ok)' : 'var(--warn)' }}>
-            {modelTrained === undefined ? '—' : modelTrained ? 'TRAINED' : 'FALLBACK'}
-          </span>
-        </div>
-        <div className="row">
-          <span>AI:</span>
-          <span className="val truncate" style={{ maxWidth: 132 }}>
-            {(aiBackend || 'DISABLED').toUpperCase()}
-          </span>
-        </div>
-      </div>
+      )}
     </aside>
   );
 };

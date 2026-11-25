@@ -54,6 +54,7 @@ export const App: React.FC = () => {
   const [isLive, setIsLive] = useState(true);
 
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const mainRef = useRef<HTMLElement>(null);
 
   const removeToast = useCallback((id: string) => setToasts((prev) => prev.filter((t) => t.id !== id)), []);
@@ -286,7 +287,7 @@ export const App: React.FC = () => {
   }
 
   return (
-    <div className="app">
+    <div className={`app${sidebarCollapsed ? ' sidebar-is-collapsed' : ''}`}>
       <Sidebar
         currentPage={route.page}
         onNavigate={(p) => navigate(p)}
@@ -300,6 +301,8 @@ export const App: React.FC = () => {
         connection={connection}
         modelTrained={status?.model_trained}
         aiBackend={aiStatus?.enabled ? aiStatus.llm_backend : null}
+        collapsed={sidebarCollapsed}
+        onToggleCollapse={() => setSidebarCollapsed((v) => !v)}
       />
 
       <div className="main">
@@ -373,11 +376,6 @@ export const App: React.FC = () => {
               >
                 The server has <span className="mono">NBT_API_KEY</span> set. The key is kept in this tab's session storage only;
                 it is never built into the frontend bundle.
-              </Banner>
-            )}
-            {auth && !auth.api_key_required && (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') && (
-              <Banner tone="warn" title="API is unauthenticated">
-                {auth.note}
               </Banner>
             )}
             {page}

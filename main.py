@@ -32,10 +32,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, HTMLResponse
 
 from api.routes import public_router, router as api_router
-<<<<<<< HEAD
 from api.voice_routes import voice_public_router, voice_router
-=======
->>>>>>> ff89564813fe8c100cd1118813d53af4264c93d6
 
 # ---------------------------------------------------------------------------
 # App Initialization & Metadata
@@ -84,27 +81,47 @@ app.add_middleware(
 # ---------------------------------------------------------------------------
 app.include_router(public_router, prefix="/api")
 app.include_router(api_router, prefix="/api")
-<<<<<<< HEAD
 app.include_router(voice_public_router, prefix="/api")
 app.include_router(voice_router, prefix="/api")
-=======
->>>>>>> ff89564813fe8c100cd1118813d53af4264c93d6
 
 # ---------------------------------------------------------------------------
 # Root / Dashboard Endpoint
 # ---------------------------------------------------------------------------
 DASHBOARD_HTML_PATH = ROOT / "templates" / "dashboard.html"
+FRONTEND_INDEX_PATH = ROOT / "static" / "index.html"
 
 
 @app.get("/", response_class=HTMLResponse, include_in_schema=False)
 async def index():
     """
-    Serve the existing single-page dashboard at root.
-    Preserves full immediate UI functionality on the FastAPI server port.
+    Serve the compiled React application when present, with the legacy dashboard
+    as a development/source-checkout fallback.
     """
+    if FRONTEND_INDEX_PATH.exists():
+        return FileResponse(FRONTEND_INDEX_PATH, media_type="text/html")
     if DASHBOARD_HTML_PATH.exists():
         return FileResponse(DASHBOARD_HTML_PATH, media_type="text/html")
     return HTMLResponse("<h2>Network Bug Triage Platform API is running. Visit <a href='/docs'>/docs</a>.</h2>")
+
+
+@app.get("/assets/{asset_path:path}", include_in_schema=False)
+async def frontend_asset(asset_path: str):
+    """Serve Vite's hashed assets from the same Cloud Run service as the API."""
+    asset_root = ROOT / "static" / "assets"
+    candidate = (asset_root / asset_path).resolve()
+    if asset_root.resolve() not in candidate.parents or not candidate.is_file():
+        return HTMLResponse("Not Found", status_code=404)
+    return FileResponse(candidate)
+
+
+@app.get("/{asset_name}", include_in_schema=False)
+async def frontend_root_asset(asset_name: str):
+    """Serve root-level public files copied by Vite (for example the favicon)."""
+    candidate = (ROOT / "static" / asset_name).resolve()
+    static_root = (ROOT / "static").resolve()
+    if static_root not in candidate.parents or not candidate.is_file():
+        return HTMLResponse("Not Found", status_code=404)
+    return FileResponse(candidate)
 
 
 # ---------------------------------------------------------------------------
@@ -131,4 +148,8 @@ if __name__ == "__main__":
         print("  the API (including remediation approval) is unauthenticated.")
         print("=" * 64)
 
-    uvicorn.run("main:app", host=host, port=port, reload=True)
+    # Cloud Run injects PORT and requires the container to bind on 0.0.0.0.
+    cloud_run = bool(os.environ.get("K_SERVICE"))
+    host = "0.0.0.0" if cloud_run else host
+    port = int(os.environ.get("PORT", port))
+    uvicorn.run("main:app", host=host, port=port, reload=not cloud_run)

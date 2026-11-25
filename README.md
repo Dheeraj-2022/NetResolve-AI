@@ -244,7 +244,6 @@ python -m controller.remediation verify <id> --samples post_samples.json
 - The key is a shared secret, and approver names are self-asserted. For anything
   beyond a local demo, put the API behind an authenticating reverse proxy/SSO.
 
-<<<<<<< HEAD
 
 ## 🎙️ Secure Voice-First Operations Assistant (Optional)
 
@@ -258,8 +257,6 @@ An optional, bounded voice/text operations assistant (`controller/voice/`, `api/
 
 See [docs/voice_assistant.md](docs/voice_assistant.md) for configuration (`NBT_VOICE_USERS_JSON`, `NBT_VOICE_AUDIT_DB`, local demo sessions) and full details.
 
-=======
->>>>>>> ff89564813fe8c100cd1118813d53af4264c93d6
 ## 📦 Datasets
 Large datasets are **not** stored in git (see `.gitignore`); place them at these paths:
 
@@ -310,6 +307,13 @@ with those fixtures, not real-world accuracy.
 
 ## ▶️ Running
 
+### Deploy the complete web application to one Cloud Run URL
+The root `Dockerfile` builds the React frontend and packages it with the FastAPI
+backend. FastAPI serves the frontend at `/` and its API at `/api/*`; the browser
+uses relative API paths, so the UI and API share the same Cloud Run URL. See
+[docs/cloud_run.md](docs/cloud_run.md) for the deployment command, runtime
+configuration, and state/security limits to account for.
+
 ### 1. Python environment
 ```powershell
 .\myenv\Scripts\Activate.ps1      # or create your own venv
@@ -344,7 +348,8 @@ cd frontend
 npm install
 npm run dev      # http://localhost:5173
 ```
-The API URL is read from `frontend/.env` (`VITE_API_BASE_URL`, default `http://127.0.0.1:8000`).
+The API URL uses the current page's origin by default. Set `VITE_API_BASE_URL` in
+`frontend/.env` only when developing against a separately hosted backend.
 
 ### 4. Pipeline without the UI
 ```bash
